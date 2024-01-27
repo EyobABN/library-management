@@ -20,12 +20,12 @@ class Loan(Document):
         Validate the availability of the selected book.
 
         This method checks whether the selected book is available for loan.
-        If the book is already loaned out, a validation error is raised.
+        If the book is unavailable, a validation error is raised.
 
         Raises:
         frappe.ValidationError: If the selected book is not available.
         '''
         # Get book
         book_doc = frappe.get_doc("Book", self.book)
-        if not book_doc.available:
-            frappe.throw(frappe._("The selected book has already been loaned out."))
+        if book_doc.status == 'Unavailable':
+            frappe.throw(frappe._("The selected book is not available for loan."))
