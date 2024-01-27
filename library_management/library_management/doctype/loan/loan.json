@@ -9,7 +9,9 @@
   "member",
   "book",
   "loan_date",
-  "return_date"
+  "return_date",
+  "overdue",
+  "returned"
  ],
  "fields": [
   {
@@ -41,11 +43,25 @@
    "in_list_view": 1,
    "label": "Return Date",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "overdue",
+   "fieldtype": "Check",
+   "label": "Overdue",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "returned",
+   "fieldtype": "Check",
+   "label": "Returned",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-25 15:27:07.648754",
+ "modified": "2024-01-27 15:54:46.593234",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Loan",
