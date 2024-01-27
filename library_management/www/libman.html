@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/library_management/libman/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+    <script type="module" crossorigin src="/assets/library_management/libman/assets/index-HikgXnr6.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/library_management/libman/assets/index-T74ItOsL.css">
+  </head>
+  <body>
+    <div id="root"></div>
+		<script>
+      window.csrf_token = '{{ frappe.session.csrf_token }}';
+
+      if (!window.frappe) window.frappe = {};
+
+      frappe.boot = JSON.parse({{ boot }});
+    </script>
+  </body>
+</html>
