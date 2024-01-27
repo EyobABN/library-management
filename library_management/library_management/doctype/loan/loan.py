@@ -17,7 +17,7 @@ class Loan(Document):
         # Convert return date to a datetime.date object
         return_date = datetime.strptime(self.return_date, "%Y-%m-%d").date()
 
-        # Set the overdue field of the doc, if the book is returned, set overdue to 0
+        # Set the overdue field of the doc. If the book is returned, set overdue to 0
         self.overdue = 1 if not self.returned and return_date < datetime.now().date() else 0
 
         # Get the book that has just been loaned out
@@ -27,12 +27,20 @@ class Loan(Document):
         book.status = 'Unavailable' if not self.returned else 'Available'
         book.save()
 
+    def on_trash(self):
+        '''
+        Check if the book has been returned before deleting the Loan document.
+        
+        This method is automatically called by Frappe right before a document is deleted.
+        '''
+        if not self.returned:
+            frappe.throw(frappe._(f'Cannot delete {self.name} because the book has not been returned.'))
+
     def validate(self):
         '''
         Validate the Loan document before saving.
 
         This method is automatically called by Frappe during the validation process.
-        It invokes custom validation methods, such as `validate_book_availability`.
         '''
         # Call custom validators
         if not self.returned: # skip checking book availability if self.returned == 1 (i.e., the book is being returned)
@@ -42,26 +50,20 @@ class Loan(Document):
     def validate_book_availability(self):
         '''
         Validate the availability of the selected book.
-
-        This method checks whether the selected book is available for loan.
-        If the book is unavailable, a validation error is raised.
-
-        Raises:
-        frappe.ValidationError: If the selected book is not available.
         '''
         # Get book
         book_doc = frappe.get_doc("Book", self.book)
+
         if book_doc.status == 'Unavailable':
             frappe.throw(frappe._("The selected book is not available for loan."))
     
     def validate_return_date(self):
         '''
-        Validate loan_date is not more recent than return_date.
-        
-        Raises:
-        frappe.ValidationError: If loan_date is more recent than return_date'''
+        Validate that loan_date is not more recent than return_date.
+        '''
         # Convert loan and return dates to a datetime.date object
         loan_date = datetime.strptime(self.loan_date, "%Y-%m-%d").date()
         return_date = datetime.strptime(self.return_date, "%Y-%m-%d").date()
+
         if loan_date > return_date:
             frappe.throw("Loan date cannot be more recent than return date.")
