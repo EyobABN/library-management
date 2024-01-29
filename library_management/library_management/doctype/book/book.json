@@ -11,7 +11,7 @@
   "publication_year",
   "isbn",
   "genre",
-  "available",
+  "status",
   "image"
  ],
  "fields": [
@@ -56,16 +56,17 @@
    "reqd": 1
   },
   {
-   "default": "1",
-   "fieldname": "available",
-   "fieldtype": "Check",
-   "label": "Available",
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Available\nUnavailable",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-25 15:19:04.375314",
+ "modified": "2024-01-28 17:39:10.872425",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Book",

@@ -1,0 +1,39 @@
+{% extends "templates/pages/base.html" %}
+
+{% block content %}
+  <div class="container d-flex flex-column">
+    <h2 class="mt-6">Books</h2>
+    <ul class="list-unstyled px-6">
+      {% for book in books %}
+        <li>
+          <div class="row pt-5">
+            <div class="col-2 px-2 text-center">
+              <img alt="{{ book.title }}" src="{{ book.image }}" />
+            </div>
+            <div class="col px-2">
+              <h4 class="mt-2 mb-0">{{ book.title }}</h4>
+              <p class="text-muted my-0">
+                By {{ book.author }} &bull; {{ book.publication_year }}
+              </p>
+              <div>
+                {%- if book.status == 'Available' -%}
+                  <span class="badge badge-success">Available</span>
+                {%- elif book.status == 'Loaned Out' -%}
+                  <span class="badge badge-primary">Issued</span>
+                {%- endif -%}
+              </div>
+              <div class="mt-2">
+                <div><strong>Genre: </strong>{{ book.genre }}</div>
+                <div>
+                  {%- if book.isbn -%}
+                    <strong>ISBN: </strong>{{ book.isbn }}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
