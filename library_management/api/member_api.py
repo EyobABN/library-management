@@ -1,48 +1,20 @@
 import frappe
 
-def authenticate_request(request):
-    '''
-    Authenticate a request based on the provided Authorization header.
-
-    Parameters:
-    - request: The request object containing headers.
-
-    Returns:
-    The authenticated user if successful.
-
-    Raises:
-    - frappe.AuthenticationError: If the Authorization header is missing or invalid.
-    '''
-    # Extract auth header
-    auth_header = request.headers.get('Authorization')
-    if not auth_header or not auth_header.startswith('token '):
-        frappe.throw('Error: Invalid Authorization header', frappe.AuthenticationError)
-
-    # Split the token into api_key and api_secret
-    api_key, api_secret = auth_header[6:].split(':')
-
-    # Look up the user with the given api_key
-    user = frappe.get_value('User', {'api_key': api_key})
-    if not user:
-        frappe.throw('Error: Unauthenticated request', frappe.AuthenticationError)
-
-    # If we got this far, the request is potentially valid
-    return user
 
 @frappe.whitelist()
 def get_members():
     '''
     Fetch a list of members with details.
 
-    This function requires authentication through the `authenticate_request` function,
-    which validates the Authorization header in the request.
+    This method only accepts authenticated requests.
 
     Returns:
     A list of dictionaries containing member details, including 'name', 'full_name',
     'membership_id', 'email', and 'phone_number'.
     '''
     # Authenticate request
-    authenticate_request(frappe.local.request)
+    if frappe.session.user == 'Guest':
+        frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
     return frappe.get_all('Member', fields=['name', 'full_name', 'membership_id', 'email', 'phone_number'])
 
@@ -51,8 +23,7 @@ def create_member(member_data):
     '''
     Create a new Member document with the provided data.
 
-    This function requires authentication through the `authenticate_request` function,
-    which validates the Authorization header in the request.
+    This method only accepts authenticated requests.
 
     Parameters:
     - member_data: A dictionary containing data for the new member, including 'first_name',
@@ -62,7 +33,8 @@ def create_member(member_data):
     The name of the newly created Member document.
     '''
     # Authenticate request
-    authenticate_request(frappe.local.request)
+    if frappe.session.user == 'Guest':
+        frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
     # Create the Book document without explicit validation
     new_doc = {'doctype': 'Member'}
@@ -79,8 +51,7 @@ def get_member(member_name):
     '''
     Fetch details of a specific Member.
 
-    This function requires authentication through the `authenticate_request` function,
-    which validates the Authorization header in the request.
+    This method only accepts authenticated requests.
 
     Parameters:
     - member_name: The name of the Member document to retrieve.
@@ -90,7 +61,8 @@ def get_member(member_name):
     'membership_id', 'email', and 'phone_number'.
     '''
     # Authenticate request
-    authenticate_request(frappe.local.request)
+    if frappe.session.user == 'Guest':
+        frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
     member = frappe.get_doc('Member', member_name).as_dict()
     return {
@@ -106,8 +78,7 @@ def update_member(member_name, update_data):
     '''
     Update details of a specific Member.
 
-    This function requires authentication through the `authenticate_request` function,
-    which validates the Authorization header in the request.
+    This method only accepts authenticated requests.
 
     Parameters:
     - member_name: The name of the Member document to update.
@@ -117,7 +88,8 @@ def update_member(member_name, update_data):
     The name of the updated Member document.
     '''
     # Authenticate request
-    authenticate_request(frappe.local.request)
+    if frappe.session.user == 'Guest':
+        frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
     doc = frappe.get_doc('Member', member_name)
     doc.update(update_data)
@@ -129,13 +101,13 @@ def delete_member(member_name):
     '''
     Delete a specific Member.
 
-    This function requires authentication through the `authenticate_request` function,
-    which validates the Authorization header in the request.
+    This method only accepts authenticated requests.
 
     Parameters:
     - member_name: The name of the Member document to delete.
     '''
     # Authenticate request
-    authenticate_request(frappe.local.request)
+    if frappe.session.user == 'Guest':
+        frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
     frappe.delete_doc('Member', member_name)
