@@ -10,13 +10,13 @@ def get_books():
 
     Returns:
     A list of dictionaries containing book details, including 'name', 'title', 'author',
-    'genre', 'publication_year', 'isbn', and 'status'.
+    'genre', 'publication_year', 'isbn', 'status', and 'image'.
     '''
     # Authenticate request
     if frappe.session.user == 'Guest':
         frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
-    return frappe.get_all('Book', fields=['name', 'title', 'author', 'genre', 'publication_year', 'isbn', 'status'])
+    return frappe.get_all('Book', fields=['name', 'title', 'author', 'genre', 'publication_year', 'isbn', 'status', 'image'])
 
 @frappe.whitelist()
 def create_book(book_data):
@@ -27,7 +27,7 @@ def create_book(book_data):
 
     Parameters:
     - book_data: A dictionary containing data for the new book, including 'title', 'author',
-      'genre', 'publication_year', 'isbn', and 'status'.
+      'genre', 'publication_year', 'isbn', 'status', and 'image'.
 
     Returns:
     The name of the newly created Book document.
@@ -39,7 +39,7 @@ def create_book(book_data):
     # Create the Book document without explicit validation
     new_doc = {'doctype': 'Book'}
     for attribute, value in book_data.items():
-        if attribute in ['title', 'author', 'genre', 'publication_year', 'isbn', 'status']:
+        if attribute in ['title', 'author', 'genre', 'publication_year', 'isbn', 'status', 'image']:
             new_doc[attribute] = value
     doc = frappe.get_doc(new_doc)
     # Save the document, Frappe will handle validation
@@ -58,7 +58,7 @@ def get_book(book_name):
 
     Returns:
     A dictionary containing details of the specified book, including 'name', 'title', 'author',
-    'genre', 'publication_year', 'isbn', and 'status'.
+    'genre', 'publication_year', 'isbn', 'status', and 'image'.
     '''
     # Authenticate request
     if frappe.session.user == 'Guest':
@@ -73,6 +73,7 @@ def get_book(book_name):
         'publication_year': book['publication_year'],
         'isbn': book['isbn'],
         'status': book['status'],
+        'image': book['image']
     }
 
 @frappe.whitelist()
