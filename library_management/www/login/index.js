@@ -13,7 +13,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
       callback: function(response) {
           if (response.message === "Logged In") {
               // Redirect or perform actions after successful login
-              window.location.href = "/libman";
+              window.location.href = "/books";
           } else {
               // Handle login failure
               alert("Login failed. Please check your credentials.");

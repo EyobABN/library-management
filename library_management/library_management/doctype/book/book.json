@@ -66,7 +66,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-28 17:39:10.872425",
+ "modified": "2024-01-29 10:14:34.066651",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Book",
@@ -118,5 +118,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "website_search_field": "title"
 }

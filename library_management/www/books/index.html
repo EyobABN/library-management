@@ -3,6 +3,9 @@
 {% block content %}
   <div class="container d-flex flex-column">
     <h2 class="mt-6">Books</h2>
+    <div class="container text-right">
+      <button type="button" id="addButton" class="btn btn-primary" onclick="openModal()">Add Book</button>
+    </div>
     <ul class="list-unstyled px-6">
       {% for book in books %}
         <li>
@@ -12,16 +15,15 @@
             </div>
             <div class="col px-2">
               <h4 class="mt-2 mb-0">{{ book.title }}</h4>
-              <p class="text-muted my-0">
+              <div class="text-muted my-0 d-flex align-items-center">
                 By {{ book.author }} &bull; {{ book.publication_year }}
-              </p>
-              <div>
                 {%- if book.status == 'Available' -%}
-                  <span class="badge badge-success">Available</span>
-                {%- elif book.status == 'Loaned Out' -%}
-                  <span class="badge badge-primary">Issued</span>
+                  <span class="badge badge-success mx-2">Available</span>
+                {%- elif book.status == 'Unavailable' -%}
+                  <span class="badge badge-secondary mx-2">Unavailable</span>
                 {%- endif -%}
               </div>
+              
               <div class="mt-2">
                 <div><strong>Genre: </strong>{{ book.genre }}</div>
                 <div>
@@ -30,10 +32,62 @@
                   {%- endif -%}
                 </div>
               </div>
+              <div class="mt-2">
+                {% if is_librarian %}
+                  <button type="button" class="btn btn-primary editBtn" onclick="openModal('{{ book.name }}')">Manage</button>
+                {% endif %}
+              </div>
+              
             </div>
           </div>
         </li>
       {% endfor %}
     </ul>
+  </div>
+  <!-- The Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close text-right" onclick="closeEditModal()">&times;</span>
+      <h2 id="modalHeader" class="mt-2"></h2>
+      <form id="editForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" required>
+        </div>
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" class="form-control" id="author" required>
+        </div>
+        <div class="form-group">
+          <label for="publication_year">Publication Year</label>
+          <input type="text" class="form-control" id="publication_year" required>
+        </div>
+        <div class="form-group">
+          <label for="genre">Genre</label>
+          <select class="form-control" id="genre" required>
+              <option>Fiction</option>
+              <option>Nonfiction</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="isbn">ISBN</label>
+          <input type="text" class="form-control" id="isbn">
+          <small id="isbnHelp" class="form-text text-muted">Must be a valid ISBN</small>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" id="status" required>
+            <option selected>Available</option>
+            <option>Unavailable</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="file" class="form-control-file" id="image">
+        </div>
+        <input type="hidden" id="docName" >
+        <button type="button" id="submitButton" class="btn btn-primary" onclick="updateDoc()">Update Book</button>
+      </form>
+    </div>
   </div>
 {% endblock %}
