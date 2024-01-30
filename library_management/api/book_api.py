@@ -1,4 +1,5 @@
 import frappe
+import json
 
 
 @frappe.whitelist()
@@ -38,6 +39,7 @@ def create_book(book_data):
 
     # Create the Book document without explicit validation
     new_doc = {'doctype': 'Book'}
+    book_data = json.loads(book_data) if type(book_data) is str else book_data # If book_data is string, convert to dict
     for attribute, value in book_data.items():
         if attribute in ['title', 'author', 'genre', 'publication_year', 'isbn', 'status', 'image']:
             new_doc[attribute] = value
@@ -95,6 +97,7 @@ def update_book(book_name, update_data):
         frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
     doc = frappe.get_doc('Book', book_name)
+    update_data = json.loads(update_data) if type(update_data) is str else update_data # If update_data is string, convert to dict
     doc.update(update_data)
     doc.save()
     return doc.name
