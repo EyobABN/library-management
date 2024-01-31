@@ -56,7 +56,7 @@ function initModal(docName='') {
 function addDoc() {
   if (validateForm()) {
     const docData = {};
-    
+
     // Prepare data to be sent as payload in post request
     docData['title'] = document.getElementById('title').value;
     docData['author'] = document.getElementById('author').value;
@@ -65,7 +65,7 @@ function addDoc() {
     const isbn = document.getElementById('isbn').value;
     if (isbn) docData['isbn'] = isbn;
     docData['status'] = document.getElementById('status').value;
-  
+
     // if a file has been selected, upload it and then update the doc
     const file = document.getElementById('image').files[0];
     if (file) {
@@ -169,7 +169,7 @@ function addDocInBackend(docData) {
     },
     callback: (r) => {
       window.location.reload(true);
-      console.log(r.message);
+      (r.message);
     },
     error: (r) => {
       console.error(r);
@@ -187,7 +187,6 @@ function updateDocInBackend(docName, docData) {
     },
     callback: (r) => {
       window.location.reload(true);
-      console.log(r.message);
     },
     error: (r) => {
       console.error(r);
