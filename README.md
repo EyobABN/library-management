@@ -1,37 +1,91 @@
 # Library Management System
 
-## Challenge
+A basic library management system with a custom API, built using the Frappe framework. This system manages books, members, and loans in a library.
 
-### Objective
+## Installation
 
-Create a basic library management system with a custom API using the Frappe framework. This system will manage books, members, and loans in a library. The goal is to assess your ability to build a full-stack application with Frappe and demonstrate your understanding of API development.
+Make sure *Bench* is installed on your local machine. If you haven't installed Bench, follow the official [installation guide](https://frappeframework.com/docs/user/en/installation).
 
-### Core Features
+- Initialize the Frappe bench
+
+  ```bash
+  bench init [bench-name]
+  ```
+
+- Go to the newly created bench directory
+
+  ```bash
+  cd [bench-name]
+  ```
+
+- Create a new site
+
+  ```bash
+  bench new-site [site-name]
+  ```
+
+- Download and add this app to the bench
+
+  ```bash
+  bench get-app [app-name] <https://github.com/EyobABN/library-management.git>
+  ```
+
+- Install this app on your newly created site
+
+  ```bash
+  bench --site [site-name] install-app [app-name]
+  ```
+
+- Start the development server
+  
+  ```bash
+  bench start
+  ```
+
+## Features
 
 - Book Management:
-  - Create a DocType Book with fields like Title, Author, Publish Date, and ISBN.
-  - Implement CRUD operations for books.
+  - [x] The Book DocType has the fields: Title, Author, Genre, Publication Year, ISBN, and Image.
+  - [x] CRUD operations available via custom API.
 - Membership Management:
-  - Create a DocType Member with fields like Name, Membership ID, Email, and Phone Number.
-  - Implement CRUD operations for members.
+  - [x] The Member DocType has the fields: Name, Membership ID, Email, and Phone Number.
+  - [x] CRUD operations available via custom API.
 - Loan Management:
-  - Create a DocType Loan for tracking book loans.
-  - Include fields such as Member, Book, Loan Date, and Return Date.
-  - Add functionality to check the availability of books for loan.
+  - [x] The Loan DocType tracks book loans and has the fields: Member, Book, Loan Date, and Return Date.
+  - [x] Validation has been implemented.
 - User Interface:
-  - Develop intuitive forms for data entry and display.
-  - Include necessary validation checks.
+  - [x] Has intuitive forms for data entry and display.
+  - [x] Validation has been implemented.
+- Authentication and Role Management:
+  - [x] Users can log into the app
+  - [x] Only users with the Librarian role are able to add, loan, modify, and delete books.
 - Reports:
-  - Create a report for all currently loaned books.
-  - Generate a report for overdue books.
-- Custom API Development:
-  - Develop a REST API that allows external applications to interact with your library system.
-  - The API should support operations like adding, retrieving, updating, and deleting books and members.
-  - Ensure the API includes authentication to secure access.
-- Advanced Features (Optional):
-  - Automated email reminders for overdue books.
-  - Feature for members to reserve books.
-  - User authentication and roles management (admin, librarian, member).
+  - [] Create a report for all currently loaned books.
+  - [] Generate a report for overdue books.
+- Advanced Features:
+  - [] Automated email reminders for overdue books.
+  - [] Feature for members to reserve books.
+
+## Custom API
+
+- The custom REST API allows external applications to interact with the library system.
+- The API supports operations like adding, retrieving, updating, and deleting books and members.
+- The API includes authentication to secure access.
+
+### API Endpoints
+
+| Endpoint | Role | Purpose |
+|----------|------|---------|
+| /api/method/library_management.api.get_books | Anyone | Retrieves the list of books that the library has |
+| /api/method/library_management.api.create_book | Librarian | Creates a new book |
+| /api/method/library_management.api.get_book | Anyone | Retrieves a single book |
+| /api/method/library_management.api.update_book | Librarian | Updates a book |
+| /api/method/library_management.api.delete_book | Librarian | Deletes a book |
+| /api/method/library_management.api.get_members | Librarian | Returns the list of members currently registered at the library |
+| /api/method/library_management.api.create_member | Librarian | Creates a new member |
+| /api/method/library_management.api.get_member | Librarian | Retrieves a single member |
+| /api/method/library_management.api.update_member | Librarian | Updates a member |
+| /api/method/library_management.api.delete_member | Librarian | Deletes a member |
 
 ## License
 
