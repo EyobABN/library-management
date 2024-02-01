@@ -60,11 +60,12 @@ Make sure *Bench* is installed on your local machine. If you haven't installed B
   - [x] Users can log into the app
   - [x] Only users with the Librarian role are able to add, loan, modify, and delete books.
 - Reports:
-  - [] Create a report for all currently loaned books.
-  - [] Generate a report for overdue books.
+  - Create a report for all currently loaned books
+  - Generate a report for overdue books
 - Advanced Features:
-  - [] Automated email reminders for overdue books.
-  - [] Feature for members to reserve books.
+  - [x] User authentication and role management (admin, librarian, member)
+  - Automated email reminders for overdue books
+  - Feature for members to reserve books
 
 ## Custom API
 
