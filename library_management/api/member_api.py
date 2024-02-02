@@ -11,13 +11,13 @@ def get_members():
 
     Returns:
     A list of dictionaries containing member details, including 'name', 'full_name',
-    'membership_id', 'email', and 'phone_number'.
+    'membership_id', 'email', 'phone_number', and 'image'.
     '''
     # Authenticate request
     if frappe.session.user == 'Guest':
         frappe.throw(frappe._('Error: Unauthenticated request'), frappe.AuthenticationError)
 
-    return frappe.get_all('Member', fields=['name', 'full_name', 'membership_id', 'email', 'phone_number'])
+    return frappe.get_all('Member', fields=['name', 'full_name', 'membership_id', 'email', 'phone_number', 'image'])
 
 @frappe.whitelist()
 def create_member(member_data):
@@ -28,7 +28,7 @@ def create_member(member_data):
 
     Parameters:
     - member_data: A dictionary containing data for the new member, including 'first_name',
-      'last_name', 'membership_id', 'email', and 'phone_number'.
+      'last_name', 'membership_id', 'email', 'phone_number', and 'image'.
 
     Returns:
     The name of the newly created Member document.
@@ -41,7 +41,7 @@ def create_member(member_data):
     new_doc = {'doctype': 'Member'}
     member_data = json.loads(member_data) if type(member_data) is str else member_data # If member_data is a string, convert to dict
     for attribute, value in member_data.items():
-        if attribute in ['first_name', 'last_name', 'membership_id', 'email', 'phone_number']:
+        if attribute in ['first_name', 'last_name', 'membership_id', 'email', 'phone_number', 'image']:
             new_doc[attribute] = value
     doc = frappe.get_doc(new_doc)
     # Save the document, Frappe will handle validation
@@ -60,7 +60,7 @@ def get_member(member_name):
 
     Returns:
     A dictionary containing details of the specified member, including 'name', 'full_name',
-    'membership_id', 'email', and 'phone_number'.
+    'membership_id', 'email', 'phone_number', and 'image'.
     '''
     # Authenticate request
     if frappe.session.user == 'Guest':
@@ -73,6 +73,7 @@ def get_member(member_name):
         'membership_id': member['membership_id'],
         'email': member['email'],
         'phone_number': member['phone_number'],
+        'image': member['image'],
     }
 
 @frappe.whitelist()

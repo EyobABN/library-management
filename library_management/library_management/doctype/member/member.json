@@ -11,7 +11,8 @@
   "full_name",
   "membership_id",
   "email",
-  "phone_number"
+  "phone_number",
+  "image"
  ],
  "fields": [
   {
@@ -55,11 +56,16 @@
    "in_list_view": 1,
    "label": "First Name",
    "reqd": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-25 15:21:46.982910",
+ "modified": "2024-02-02 13:12:12.064055",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Member",
