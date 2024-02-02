@@ -9,6 +9,7 @@
     </div>
     {% endif %}
     <ul class="list-unstyled px-6">
+      {% if books %}
       {% for book in books %}
         <li>
           <div class="row p-3 m-3">
@@ -48,6 +49,11 @@
           </div>
         </li>
       {% endfor %}
+      {% else %}
+        <div class="text-center text-secondary p-5">
+          No books yet.{% if is_librarian %}<br/>Click Add Book to add one.{% endif %}
+        </div>
+      {% endif %}
     </ul>
   </div>
   <!-- The form Modal -->
@@ -87,8 +93,7 @@
             </div>
             <div class="form-group">
               <label for="isbn">ISBN</label>
-              <input type="text" class="form-control" id="isbn">
-              <small id="isbnHelp" class="form-text text-muted">Must be a valid ISBN</small>
+              <input type="text" class="form-control" id="isbn" title="Must be a valid ISBN">
               <span class="error" id="isbnError"></span>
             </div>
             <div class="form-group">
@@ -124,7 +129,7 @@
           </button>
         </div>
         <div class="modal-body">
-          Are you sure you want to delete this document?
+          Are you sure you want to delete this book?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
