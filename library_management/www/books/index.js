@@ -293,7 +293,5 @@ function displayErrorMessage(fieldId, message) {
 // Function to clear error messages
 function clearErrorMessages() {
   var errorElements = document.querySelectorAll('.error');
-  errorElements.forEach(function (element) {
-    element.innerHTML = '';
-  });
+  errorElements.forEach(element => element.innerHTML = '');
 }
