@@ -48,10 +48,11 @@ Make sure *Bench* is installed on your local machine. If you haven't installed B
   - [x] The Book DocType has the fields: Title, Author, Genre, Publication Year, ISBN, and Image.
   - [x] CRUD operations available via custom API.
 - Membership Management:
-  - [x] The Member DocType has the fields: Name, Membership ID, Email, and Phone Number.
+  - [x] The Member DocType has the fields: Name, Membership ID, Email, Phone Number, and Image.
   - [x] CRUD operations available via custom API.
 - Loan Management:
-  - [x] The Loan DocType tracks book loans and has the fields: Member, Book, Loan Date, and Return Date.
+  - [x] The Loan DocType tracks book loans and has the fields: Member, Book, Loan Date, Return Date, Overdue, and Returned.
+  - [x] The Overdue and Returned fields are read-only and are calculated automatically whenever the document is saved.
   - [x] Validation has been implemented.
 - User Interface:
   - [x] Has intuitive forms for data entry and display.
