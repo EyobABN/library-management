@@ -1,0 +1,11 @@
+/* Style for required fields */
+.required::after {
+  content: "*";
+  color: #ff7f7f;
+  margin-left: 4px; /* Add spacing between the asterisk and the label */
+}
+
+/* style for error messages */
+.error {
+  color: #ff7f7f;
+}
