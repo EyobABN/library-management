@@ -4,7 +4,7 @@ A basic library management system with a custom API, built using the Frappe fram
 
 ## Installation
 
-Make sure *Bench* is installed on your local machine. If you haven't installed Bench, follow the official [installation guide](https://frappeframework.com/docs/user/en/installation).
+Make sure *Bench* is installed on your machine. If you haven't installed Bench, follow the official [installation guide](https://frappeframework.com/docs/user/en/installation) to install Bench in development mode.
 
 - Initialize the Frappe bench
 
@@ -71,23 +71,28 @@ Make sure *Bench* is installed on your local machine. If you haven't installed B
 ## Custom API
 
 - The custom REST API allows external applications to interact with the library system.
-- The API supports operations like adding, retrieving, updating, and deleting books and members.
+- The API supports operations like adding, retrieving, updating, and deleting books, members and loans.
 - The API includes authentication to secure access.
 
 ### API Endpoints
 
 | Endpoint | Role | Purpose |
 |----------|------|---------|
-| /api/method/library_management.api.get_books | Anyone | Retrieves the list of books that the library has |
-| /api/method/library_management.api.create_book | Librarian | Creates a new book |
-| /api/method/library_management.api.get_book | Anyone | Retrieves a single book |
-| /api/method/library_management.api.update_book | Librarian | Updates a book |
-| /api/method/library_management.api.delete_book | Librarian | Deletes a book |
-| /api/method/library_management.api.get_members | Librarian | Returns the list of members currently registered at the library |
-| /api/method/library_management.api.create_member | Librarian | Creates a new member |
-| /api/method/library_management.api.get_member | Librarian | Retrieves a single member |
-| /api/method/library_management.api.update_member | Librarian | Updates a member |
-| /api/method/library_management.api.delete_member | Librarian | Deletes a member |
+| /api/method/library_management.api.book_api.get_books | Anyone | Retrieves the list of books that the library has |
+| /api/method/library_management.api.book_api.create_book | Librarian | Creates a new book |
+| /api/method/library_management.api.book_api.get_book | Anyone | Retrieves a single book |
+| /api/method/library_management.api.book_api.update_book | Librarian | Updates a book |
+| /api/method/library_management.api.book_api.delete_book | Librarian | Deletes a book |
+| /api/method/library_management.api.member_api.get_members | Librarian | Returns the list of members currently registered at the library |
+| /api/method/library_management.api.member_api.create_member | Librarian | Creates a new member |
+| /api/method/library_management.api.member_api.get_member | Librarian | Retrieves a single member |
+| /api/method/library_management.api.member_api.update_member | Librarian | Updates a member |
+| /api/method/library_management.api.member_api.delete_member | Librarian | Deletes a member |
+| /api/method/library_management.api.loan_api.get_loans | Librarian | Returns the list of loans |
+| /api/method/library_management.api.loan_api.create_loan | Librarian | Creates a new loan |
+| /api/method/library_management.api.loan_api.get_loan | Librarian | Retrieves a single loan |
+| /api/method/library_management.api.loan_api.update_loan | Librarian | Updates a loan |
+| /api/method/library_management.api.loan_api.delete_loan | Librarian | Deletes a loan |
 
 ## License
 
