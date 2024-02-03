@@ -27,7 +27,7 @@ Make sure *Bench* is installed on your machine. If you haven't installed Bench, 
 - Download and add this app to the bench
 
   ```bash
-  bench get-app [app-name] <https://github.com/EyobABN/library-management.git>
+  bench get-app <https://github.com/EyobABN/library-management.git>
   ```
 
 - Install this app on your newly created site
