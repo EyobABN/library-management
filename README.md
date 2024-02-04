@@ -36,6 +36,12 @@ Make sure *Bench* is installed on your machine. If you haven't installed Bench, 
   bench --site [site-name] install-app [app-name]
   ```
 
+- Add the site to hosts
+
+  ```bash
+  bench --site [site-name] add-to-hosts
+  ```
+
 - Start the development server
   
   ```bash
